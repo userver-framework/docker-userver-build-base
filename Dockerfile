@@ -107,4 +107,20 @@ RUN echo LANG=en_US.UTF-8 >> /etc/default/locale
 RUN mkdir -p /home/user
 RUN chmod 777 /home/user
 
+EXPOSE 8080
+EXPOSE 8081
+EXPOSE 8082
+EXPOSE 8083
+EXPOSE 8084
+EXPOSE 8085
+EXPOSE 8086
+EXPOSE 8087
+EXPOSE 8088
+EXPOSE 8089
+EXPOSE 8090
+EXPOSE 8091
+EXPOSE 8093
+EXPOSE 8094
+EXPOSE 8095
+
 ENV PATH /usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/postgresql/13/bin:${PATH}
