@@ -1,8 +1,8 @@
 FROM debian:bullseye-slim
 
 # Set current timezone
-RUN echo "Europe/Moscow" > /etc/timezone
-RUN ln -sf /usr/share/zoneinfo/Europe/Moscow /etc/localtime
+RUN echo "UTC" > /etc/timezone
+RUN ln -sf /usr/share/zoneinfo/UTC /etc/localtime
 
 ENV DEBIAN_FRONTEND noninteractive
 
