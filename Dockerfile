@@ -1,8 +1,8 @@
 FROM debian:bullseye-slim
 
 # Set current timezone
-RUN echo "UTC" > /etc/timezone
-RUN ln -sf /usr/share/zoneinfo/UTC /etc/localtime
+RUN echo "Europe/Moscow" > /etc/timezone
+RUN ln -sf /usr/share/zoneinfo/Europe/Moscow /etc/localtime
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -26,6 +26,7 @@ RUN apt-get install -y --allow-unauthenticated \
 	libev-dev \
 	zlib1g-dev \
 	libcurl4-openssl-dev \
+	curl \
 	libcrypto++-dev \
 	libyaml-cpp-dev \
 	libssl-dev \
