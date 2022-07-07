@@ -108,6 +108,8 @@ RUN echo LANG=en_US.UTF-8 >> /etc/default/locale
 RUN mkdir -p /home/user
 RUN chmod 777 /home/user
 
+RUN pip3 install -g pep8
+
 EXPOSE 8080
 EXPOSE 8081
 EXPOSE 8082
