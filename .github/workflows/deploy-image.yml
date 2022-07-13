@@ -32,19 +32,19 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: build amd64
-        run:  docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:manifest-amd64 --build-arg ARCH=amd64 .
+        run:  docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:manifest-amd64 --build-arg ARCH=amd64 --platform linux/amd64 .
 
       - name: push amd64
         run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:manifest-amd64 
 
       - name: build arm32v7
-        run:  docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:manifest-arm32v7 --build-arg ARCH=arm32v7 .
+        run:  docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:manifest-arm32v7 --build-arg ARCH=arm32v7 --platform linux/arm/v7 .
 
       - name: push arm32v7
         run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:manifest-arm32v7
 
       - name: build arm64v8
-        run:  docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:manifest-arm64v8 --build-arg ARCH=arm64v8 .
+        run:  docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:manifest-arm64v8 --build-arg ARCH=arm64v8 --platform linux/arm64.
 
       - name: push arm64v8
         run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:manifest-arm64v8
