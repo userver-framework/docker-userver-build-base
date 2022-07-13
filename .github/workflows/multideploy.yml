@@ -31,5 +31,8 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: create buildx
+        run: docker buildx create --use
+
       - name: buildx
         run: docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest --push .
