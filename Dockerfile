@@ -1,5 +1,4 @@
-ARG ARCH=
-FROM ${ARCH}/debian:bullseye-slim
+FROM debian:bullseye-slim
 
 # Set current timezone
 RUN echo "Europe/Moscow" > /etc/timezone
