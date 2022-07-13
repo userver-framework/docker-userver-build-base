@@ -44,7 +44,7 @@ jobs:
         run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:manifest-arm32v7
 
       - name: build arm64v8
-        run:docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:manifest-arm64v8 --build-arg ARCH=arm64v8 --platform linux/arm64 .
+        run: docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:manifest-arm64v8 --build-arg ARCH=arm64v8 --platform linux/arm64 .
 
       - name: push arm64v8
         run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:manifest-arm64v8
