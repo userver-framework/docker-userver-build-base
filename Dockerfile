@@ -26,7 +26,7 @@ RUN apt-get install -y --allow-unauthenticated \
 	libev-dev \
 	zlib1g-dev \
 	libcurl4-openssl-dev \
-	libcrypto++-dev \
+	curl \
 	libyaml-cpp-dev \
 	libssl-dev \
 	libfmt-dev \
@@ -99,6 +99,8 @@ RUN sed -i 's/^# *\(en_US.UTF-8\)/\1/' /etc/locale.gen
 RUN echo "export LC_ALL=en_US.UTF-8" >> ~/.bashrc
 RUN echo "export LANG=en_US.UTF-8" >> ~/.bashrc
 RUN echo "export LANGUAGE=en_US.UTF-8" >> ~/.bashrc
+
+RUN pip3 install pep8
 
 RUN locale-gen ru_RU.UTF-8
 RUN locale-gen en_US.UTF-8
