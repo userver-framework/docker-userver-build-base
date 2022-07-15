@@ -14,7 +14,7 @@ env:
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
-  build-and-push-image:
+  build_manifest:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -31,16 +31,26 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
-        with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+      - name: build arm32v7
+        run: docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:manifest-arm32v7 --build-arg ARCH=arm32v7 --platform linux/arm/v7 .
 
-      - name: Build and push Docker image
-        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
-        with:
-          context: .
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+      - name: push arm32v7
+        run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:manifest-arm32v7
+
+      - name: build arm64v8
+        run: docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:manifest-arm64v8 --build-arg ARCH=arm64v8 --platform linux/arm64 .
+
+      - name: push arm64v8
+        run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:manifest-arm64v8
+
+      - name: build amd64
+        run: docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:manifest-amd64 --build-arg ARCH=amd64 --platform linux/amd64 .
+
+      - name: push amd64
+        run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:manifest-amd64 
+
+      - name: create manifest
+        run: docker manifest create ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:release --amend ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:manifest-amd64 --amend ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:manifest-arm32v7 --amend ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:manifest-arm64v8
+
+      - name: push manifest
+        run: docker manifest push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:release

@@ -1,4 +1,5 @@
-FROM debian:bullseye-slim
+ARG ARCH=
+FROM ${ARCH}/debian:bullseye-slim
 
 # Set current timezone
 RUN echo "Europe/Moscow" > /etc/timezone
@@ -26,6 +27,7 @@ RUN apt-get install -y --allow-unauthenticated \
 	libev-dev \
 	zlib1g-dev \
 	libcurl4-openssl-dev \
+	curl \
 	libcrypto++-dev \
 	libyaml-cpp-dev \
 	libssl-dev \
@@ -106,6 +108,8 @@ RUN echo LANG=en_US.UTF-8 >> /etc/default/locale
 
 RUN mkdir -p /home/user
 RUN chmod 777 /home/user
+
+RUN pip3 install pep8
 
 EXPOSE 8080
 EXPOSE 8081
