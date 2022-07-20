@@ -1,11 +1,11 @@
-ARG ARCH=
-FROM ${ARCH}/debian:bullseye-slim
+FROM debian:bullseye-slim
 
 # Set current timezone
 RUN echo "Europe/Moscow" > /etc/timezone
 RUN ln -sf /usr/share/zoneinfo/Europe/Moscow /etc/localtime
 
 ENV DEBIAN_FRONTEND noninteractive
+ENV CMAKE_OPTS "-DUSERVER_FEATURE_MONGODB=OFF -DUSERVER_FEATURE_CLICKHOUSE=OFF"
 
 RUN apt-get update
 
@@ -67,34 +67,11 @@ RUN apt-get install -y --allow-unauthenticated \
 	sudo \
 	gnupg2 \
 	wget \
-	dirmngr
-
-# hack for distutils for python3.7
-#RUN apt-get install -y --allow-unauthenticated software-properties-common
-#RUN add-apt-repository -y ppa:deadsnakes/ppa
-#RUN apt-get install -y --allow-unauthenticated -o Dpkg::Options::="--force-overwrite" python3.7-distutils
-#RUN add-apt-repository -y -r ppa:deadsnakes/ppa
+	dirmngr \
+	postgresql-common \
+	locales
 
 RUN apt-get clean all
-
-RUN wget -qO - https://www.mongodb.org/static/pgp/server-5.0.asc | sudo apt-key add -
-RUN echo "deb http://repo.mongodb.org/apt/debian buster/mongodb-org/5.0 main" | sudo tee /etc/apt/sources.list.d/mongodb-org-5.0.list
-RUN sudo apt-get update
-
-RUN sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv E0C56BD4
-
-RUN echo "deb https://repo.clickhouse.com/deb/stable/ main/" | sudo tee \
-    /etc/apt/sources.list.d/clickhouse.list
-
-RUN sudo apt-get update
-
-RUN apt-get install -y --allow-unauthenticated clickhouse-server clickhouse-client
-#clickhouse-common-static
-
-RUN sudo apt-get install -y --allow-unauthenticated mongodb-org mongodb-org-database mongodb-org-server mongodb-org-shell mongodb-org-mongos mongodb-org-tools postgresql-common locales
-
-#RUN ln -sf /usr/sbin/clickhouse-server /usr/bin/clickhouse
-
 
 # Generating locale
 RUN sed -i 's/^# *\(en_US.UTF-8\)/\1/' /etc/locale.gen
