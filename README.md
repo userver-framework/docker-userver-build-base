@@ -1,7 +1,4 @@
-# docker-userver-build-base
-Base Docker image for userver development and deploy
-
-How to build image in diff machine and send in one manifest:
+# How to build image in diff machine and send in one manifest:
 
 in Dockerfile add ARCH arg
 
