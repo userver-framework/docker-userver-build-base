@@ -115,6 +115,8 @@ RUN echo "\
 	deb [signed-by=/usr/share/keyrings/io.packagecloud.rabbitmq.gpg] https://packagecloud.io/rabbitmq/rabbitmq-server/ubuntu/ bionic main \
 	deb-src [signed-by=/usr/share/keyrings/io.packagecloud.rabbitmq.gpg] https://packagecloud.io/rabbitmq/rabbitmq-server/ubuntu/ bionic main" \
 	| sudo tee /etc/apt/sources.list.d/rabbitmq.list
+## Update package indices
+RUN sudo apt-get update -y
 ## Install Erlang packages
 RUN sudo apt-get install -y erlang-base \
 				erlang-asn1 erlang-crypto erlang-eldap erlang-ftp erlang-inets \
