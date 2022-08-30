@@ -44,10 +44,10 @@ jobs:
             #run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:manifest-arm64v8
 
       - name: build amd64
-        run: docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:v1-amd64 --build-arg ARCH=amd64 --platform linux/amd64 amd64/
+        run: docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:v1a-amd64 --build-arg ARCH=amd64 --platform linux/amd64 amd64/
 
       - name: push amd64
-        run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:v1-amd64 
+        run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:v1a-amd64 
 
           #- name: create manifest
           #run: docker manifest create ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:release --amend ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:manifest-amd64 --amend ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:manifest-arm32v7 --amend ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:manifest-arm64v8
