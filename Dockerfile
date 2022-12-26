@@ -40,6 +40,8 @@ RUN apt-get install -y --allow-unauthenticated \
 	postgresql-server-dev-13 \
 	libkrb5-dev \
 	libhiredis-dev \
+	libmariadb3 \
+	libmariadb-dev \
 	libgrpc-dev \
 	libgrpc++-dev \
 	libgrpc++1 \
