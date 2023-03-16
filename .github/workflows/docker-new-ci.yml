@@ -34,7 +34,9 @@ jobs:
       
       - name: Run prepare
         run: |
-          bash < (wget -qO- https://raw.githubusercontent.com/userver-framework/userver/develop/scripts/docker/prepare_image.sh)
+          curl -s -L https://raw.githubusercontent.com/userver-framework/userver/develop/scripts/docker/prepare_image.sh
+          chmod +x ./prepare_image.sh
+          ./prepare_image.sh
 
       - name: Log into registry ${{ env.REGISTRY }}
         uses: docker/login-action@28218f9b04b4f3f62068d7b6ce6ca5b26e35336c
