@@ -34,7 +34,7 @@ jobs:
       
       - name: Run prepare
         run: |
-          curl -s -L https://raw.githubusercontent.com/userver-framework/userver/develop/scripts/docker/prepare_image.sh
+          wget https://raw.githubusercontent.com/userver-framework/userver/develop/scripts/docker/prepare_image.sh
           chmod +x ./prepare_image.sh
           ./prepare_image.sh
 
