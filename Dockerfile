@@ -7,6 +7,7 @@ RUN ln -sf /usr/share/zoneinfo/Europe/Moscow /etc/localtime
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update
+
 RUN apt-get install -y --allow-unauthenticated \
     binutils-dev \
     build-essential \
@@ -36,6 +37,7 @@ RUN apt-get install -y --allow-unauthenticated \
 	libbson-dev \
 	libldap2-dev \
 	libpq-dev \
+	postgresql-server-dev-13 \
 	libkrb5-dev \
 	libhiredis-dev \
 	libgrpc-dev \
@@ -57,22 +59,13 @@ RUN apt-get install -y --allow-unauthenticated \
 	libgtest-dev \
 	ccache \
 	git \
+	postgresql-13 \
 	redis-server \
 	vim \
 	sudo \
 	gnupg2 \
 	wget \
 	dirmngr
-
-RUN sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
-RUN wget -qO- https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo tee /etc/apt/trusted.gpg.d/pgdg.asc &>/dev/null
-
-RUN apt-get install -y --allow-unauthenticated \
-	postgresql-server-dev-15 \
-	postgresql-15
-#install g++11
-RUN sudo apt install g++-11
-RUN export CXX=/usr/bin/g++-11
 
 # hack for distutils for python3.7
 #RUN apt-get install -y --allow-unauthenticated software-properties-common
@@ -132,4 +125,4 @@ EXPOSE 8093
 EXPOSE 8094
 EXPOSE 8095
 
-ENV PATH /usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/postgresql/15/bin:${PATH}
+ENV PATH /usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/postgresql/13/bin:${PATH}
