@@ -1,23 +1,6 @@
 # How to build image in diff machine and send in one manifest:
 
-in Dockerfile add ARCH arg
-
-```
-ARG ARCH=
-FROM ${ARCH}/debian:bullseye-slim
-```
-
-Start build:
-```
-docker build -t ghcr.io/userver-framework/docker-userver-build-base:manifest-arm64v8 \
-    --build-arg ARCH=arm64v8 --platform linux/arm64 .
-    
-docker build -t ghcr.io/userver-framework/docker-userver-build-base:manifest-arm32v7 \
-    --build-arg ARCH=arm32v7 --platform linux/arm/v7 .
-    
-docker build -t ghcr.io/userver-framework/docker-userver-build-base:manifest-amd64 \
-    --build-arg ARCH=amd64 --platform linux/amd64 .
-```
+Follow the [instructions](https://userver.tech/d5/d1b/md_en_userver_docker.html)
 
 Push images:
 
